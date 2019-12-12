@@ -5,6 +5,7 @@
     "main": "server/index.js",
     "scripts": {
       "start": "node server/index.js",
+      "build": "react-scripts client/build",
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     "engines": {
