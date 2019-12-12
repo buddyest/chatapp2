@@ -1,0 +1,22 @@
+{
+    "name": "chatapp",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server/index.js",
+    "scripts": {
+      "start": "node server/index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "engines": {
+        "node": "v10.15.3"
+      },
+    "author": "Buddyest",
+    "license": "ISC",
+    "dependencies": {
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "nodemon": "^2.0.2",
+      "socket.io": "^2.3.0"
+    }
+  }
+  
