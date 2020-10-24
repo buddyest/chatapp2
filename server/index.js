@@ -10,16 +10,24 @@ const router = require('./router');
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-io.origins('*:*')
 
 app.use(cors());
 app.use(router);
 
-
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+ // Add this
+ if (req.method === 'OPTIONS') {
+
+      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, OPTIONS');
+      res.header('Access-Control-Max-Age', 120);
+      return res.status(200).json({});
+  }
+
   next();
+
 });
 
 io.on('connect', (socket) => {
