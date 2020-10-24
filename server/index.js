@@ -10,7 +10,7 @@ const router = require('./router');
 const app = express();
 app.use(
   cors({
-    origin: ['https://chatstep.herokuapp.com/','https://chatstep.tk/', 'https://localhoat:5000/'],
+    origin: [http://localhost:5000','http://127.0.0.1:5000],
     credentials: true
   })
 );
