@@ -8,6 +8,10 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const router = require('./router');
 
 const app = express();
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 const server = http.createServer(app);
 const io = socketio(server);
 
@@ -32,8 +36,9 @@ io.on('connect', (socket) => {
 
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
-
-    io.to(user.room).emit('message', { user: user.name, text: message });
+    if (user) {
+      io.to(user.room).emit('message', { user: user.name, text: message }); 
+    }
 
     callback();
   });
