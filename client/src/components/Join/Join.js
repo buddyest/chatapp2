@@ -6,7 +6,7 @@ import io from "socket.io-client";
 let socket;
 
 const Join = () => {
-  const ENDPOINT = "http://localhost:5000";
+  const ENDPOINT = "https://chatstep.herokuapp.com";
   socket = io(ENDPOINT);
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
