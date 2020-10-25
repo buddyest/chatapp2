@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./join.css";
 import io from "socket.io-client";
+import { ENDPOINT } from '../../config';
 
 let socket;
 
 const Join = () => {
-  const ENDPOINT = "https://chatstep.herokuapp.com";
   socket = io(ENDPOINT);
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");

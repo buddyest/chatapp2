@@ -2,6 +2,7 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
+const { ENDPOINT } = require('./config')
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
@@ -9,26 +10,12 @@ const router = require('./router');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server, { origins: '*localhost:5000'});
+const io = socketio(server);
 
-app.use(cors());
+
 app.use(router);
+app.use(cors());
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
- // Add this
- if (req.method === 'OPTIONS') {
-
-      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, OPTIONS');
-      res.header('Access-Control-Max-Age', 120);
-      return res.status(200).json({});
-  }
-
-  next();
-
-});
 
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
