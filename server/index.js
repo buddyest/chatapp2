@@ -9,7 +9,7 @@ const router = require('./router');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server, { origins: '*:*'});
+const io = socketio(server, { origins: '*localhost:5000'});
 
 app.use(cors());
 app.use(router);
