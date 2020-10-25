@@ -1,7 +1,6 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const cors = require('cors');
 const { ENDPOINT } = require('./config/config')
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
@@ -12,12 +11,13 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-
+app.use(express.json());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(router);
-app.use( cors({
-  origin: ['https://chatstep.tk','https://www.chatstep.tk'],
-  credentials: true
-}));
 
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
