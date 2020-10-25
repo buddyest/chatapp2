@@ -14,7 +14,10 @@ const io = socketio(server);
 
 
 app.use(router);
-app.use(cors());
+app.use( cors({
+  origin: ['https://chatstep.tk','https://www.chatstep.tk'],
+  credentials: true
+}));
 
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
