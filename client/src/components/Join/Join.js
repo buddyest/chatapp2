@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./join.css";
 import io from "socket.io-client";
-import { ENDPOINT } from '../../config';
+import { ENDPOINT } from '../../config/config';
 
 let socket;
 
